@@ -12,18 +12,34 @@ namespace RabbitMQ.Publisher
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
 
-            channel.QueueDeclare("RabbitMQ-Queue", false, false, false, null);
+            channel.QueueDeclare(
+                queue: "RabbitMQ-Queue",
+                durable: false,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null);
             // [Exchange Type] direct, fanout, topic, or headers
-            channel.ExchangeDeclare("Logs", "topic", false, false, null);
+            channel.ExchangeDeclare(
+                exchange: "Logs",
+                type: ExchangeType.Topic,
+                durable: false,
+                autoDelete: false,
+                arguments: null);
 
             string message = "Sending a message using ASP.NET Core RabbitMQ";
             byte[] body;
+            var properties = channel.CreateBasicProperties();
+            properties.Persistent = true;
 
             do
             {
                 body = Encoding.UTF8.GetBytes(message);
 
-                channel.BasicPublish("", "RabbitMQ-Queue", null, body);
+                channel.BasicPublish(
+                    exchange: string.Empty,
+                    routingKey: "RabbitMQ-Queue",
+                    basicProperties: properties,
+                    body: body);
                 channel.BasicPublish("Logs", "Information.General", null, Encoding.UTF8.GetBytes($"[Information] {message}"));
                 channel.BasicPublish("Logs", "Warning.Minor", null, Encoding.UTF8.GetBytes($"[Warning] {message}"));
                 channel.BasicPublish("Logs", "Error.Important", null, Encoding.UTF8.GetBytes($"[Error] {message}"));

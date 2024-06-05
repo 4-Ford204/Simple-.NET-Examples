@@ -2,6 +2,7 @@
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
+using System.Threading;
 
 namespace RabbitMQ.Subscriber
 {
@@ -14,6 +15,10 @@ namespace RabbitMQ.Subscriber
             using var channel = connection.CreateModel();
 
             //channel.QueueDeclare("RabbitMQ-Queue", false, false, false, null);
+            channel.BasicQos(
+                prefetchSize: 0,
+                prefetchCount: 1,
+                global: false);
             //channel.ExchangeDeclare("Logs", "topic", false, false, null);
 
             var queueName = channel.QueueDeclare().QueueName;
@@ -26,12 +31,19 @@ namespace RabbitMQ.Subscriber
             {
                 var messageBody = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(messageBody);
-                Console.WriteLine($"Subscriber: {message}");
+                Thread.Sleep(message.Split('.').Length * 1000);
+                Console.WriteLine($"Subscriber: {message} [{DateTime.Now}]");
+
+                channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
             };
-            channel.BasicConsume("RabbitMQ-Queue", true, consumer);
+
+            channel.BasicConsume(
+                queue: "RabbitMQ-Queue",
+                autoAck: false, // automatic acknowledgement mode
+                consumer: consumer);
             channel.BasicConsume(queueName, true, consumer);
 
-            while (true) { }
+            Console.ReadKey();
         }
     }
 }
