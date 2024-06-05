@@ -2,7 +2,7 @@
 
 namespace ML.NET.BinaryClassification.SentimentAnalysis
 {
-    public class SentimentData
+    public class SentimentIssue
     {
         [LoadColumn(0)]
         public string? SentimentText { get; set; }
@@ -10,7 +10,7 @@ namespace ML.NET.BinaryClassification.SentimentAnalysis
         public bool Sentiment { get; set; }
     }
 
-    public class SentimentPrediction : SentimentData
+    public class SentimentPrediction : SentimentIssue
     {
         [ColumnName("PredictedLabel")]
         public bool Prediction { get; set; }
