@@ -9,12 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publisher", "RabbitMQ\Publi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriber", "RabbitMQ\Subscriber\Subscriber.csproj", "{BDF1F670-480A-47DD-A05E-EDCFB01C666E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ML.NET", "ML.NET", "{90186827-E019-441E-BAFB-6F15C9993774}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BinaryClassification", "BinaryClassification", "{234C72A0-C97E-4E48-929C-4A43A757E307}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalysis", "ML.NET\BinaryClassification\SentimentAnalysis\SentimentAnalysis.csproj", "{E92F4AE2-407C-49F0-9BF0-E616A6C8AC59}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +23,6 @@ Global
 		{BDF1F670-480A-47DD-A05E-EDCFB01C666E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDF1F670-480A-47DD-A05E-EDCFB01C666E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDF1F670-480A-47DD-A05E-EDCFB01C666E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E92F4AE2-407C-49F0-9BF0-E616A6C8AC59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E92F4AE2-407C-49F0-9BF0-E616A6C8AC59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E92F4AE2-407C-49F0-9BF0-E616A6C8AC59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E92F4AE2-407C-49F0-9BF0-E616A6C8AC59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,8 +30,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B8575229-8A9A-4E4B-8879-C6928A22A5DD} = {213F76B2-42BF-473E-B34A-3A60B8645F62}
 		{BDF1F670-480A-47DD-A05E-EDCFB01C666E} = {213F76B2-42BF-473E-B34A-3A60B8645F62}
-		{234C72A0-C97E-4E48-929C-4A43A757E307} = {90186827-E019-441E-BAFB-6F15C9993774}
-		{E92F4AE2-407C-49F0-9BF0-E616A6C8AC59} = {234C72A0-C97E-4E48-929C-4A43A757E307}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D11741C4-290A-4204-B17B-A9845D32C58C}
