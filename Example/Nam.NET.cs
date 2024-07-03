@@ -84,5 +84,16 @@ namespace Example
         }
 
         #endregion
+
+        #region Phần 9 - Biểu thức Lamda 
+
+        public void Lamda()
+        {
+            Func<int, int, int> sum = (a, b) => a + b;
+            Action<string> print = (string message) => Console.WriteLine(message);
+            var compare = object (int a, int b) => a > b ? true : "False";
+        }
+
+        #endregion
     }
 }
