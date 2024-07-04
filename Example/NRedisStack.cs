@@ -24,6 +24,8 @@ namespace Example
         private IDatabase database;
         ConfigurationOptions options;
 
+        public NRedisStack() { }
+
         public NRedisStack(int type = 0)
         {
             switch (type)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 
 namespace Example
 {
@@ -7,9 +8,9 @@ namespace Example
     {
         #region Phần 7 - Stream và File
 
-        private string _directoryTree = string.Empty;
+        public string _directoryTree = string.Empty;
 
-        private void GetDirectoryAndFile()
+        public void GetDirectoryAndFile()
         {
             var path = $"C:\\";
             var dir = new DirectoryInfo(path);
@@ -28,7 +29,7 @@ namespace Example
             }
         }
 
-        private void Copy()
+        public void Copy()
         {
             var source = @"C:\{source}";
             var destination = @"C:\{destination}";
@@ -51,7 +52,7 @@ namespace Example
             //outputStream.Close();
         }
 
-        private string GetDirectoryTree(string path)
+        public string GetDirectoryTree(string path)
         {
             _directoryTree = string.Empty;
             var dir = new DirectoryInfo(path);
@@ -61,7 +62,7 @@ namespace Example
             return _directoryTree;
         }
 
-        private void DirectoryTreeRecursion(DirectoryInfo dir, int level)
+        public void DirectoryTreeRecursion(DirectoryInfo dir, int level)
         {
             var directories = dir.GetDirectories();
             int tab = level;
@@ -85,13 +86,91 @@ namespace Example
 
         #endregion
 
-        #region Phần 9 - Biểu thức Lamda 
+        #region Phần 9 - Biểu thức Lamda
 
         public void Lamda()
         {
             Func<int, int, int> sum = (a, b) => a + b;
             Action<string> print = (string message) => Console.WriteLine(message);
             var compare = object (int a, int b) => a > b ? true : "False";
+        }
+
+        #endregion
+
+        #region Phần 29 - Reflection 
+
+        /// <summary>
+        /// Lấy thông tin của một Assembly
+        /// </summary>
+        /// <param name="fileName">Đường dẫn đến Assembly (file đuôi dll)</param>
+        public Assembly? InspectAssembly(string fileName)
+        {
+            var assembly = Assembly.LoadFile(fileName);
+
+            if (assembly != null)
+            {
+                Console.WriteLine($"Assembly: {fileName}\n");
+                InspectType(assembly);
+            }
+
+            return assembly;
+        }
+
+        public void InspectType(Assembly assembly)
+        {
+            foreach (var type in assembly.GetTypes())
+            {
+                Console.WriteLine($"Type: {type.FullName}");
+                InspectField(type);
+                InspectMethod(type);
+            }
+        }
+
+        public void InspectField(Type type)
+        {
+            foreach (var field in type.GetFields())
+            {
+                Console.WriteLine($"\tField:  {field.FieldType} - {field.Name}");
+            }
+        }
+
+        public void InspectMethod(Type type)
+        {
+            foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
+            {
+                if (method.DeclaringType == type)
+                {
+                    Console.WriteLine($"\tMethod: {method.Name}");
+                }
+            }
+        }
+
+        public void LoadObjectFromAssembly(Assembly assembly, string typeName = "", string methodName = "")
+        {
+            var type = assembly.GetType(typeName);
+
+            if (type != null)
+            {
+                // Ví dụ: NRedisStack
+                var constructor = type.GetConstructor([]);
+                var constructorParam = type.GetConstructor([typeof(int)]);
+                var obj = constructor.Invoke([]);
+                var objParam = constructorParam.Invoke([0]);
+
+                if (objParam != null)
+                {
+                    var method = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public, []);
+
+                    if (method != null)
+                    {
+                        method.Invoke(objParam, []);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Constructor not found");
+            }
         }
 
         #endregion
