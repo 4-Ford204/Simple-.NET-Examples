@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 namespace Example
 {
@@ -174,5 +175,68 @@ namespace Example
         }
 
         #endregion
+
+        #region Phần 30 - Thread
+
+        public void Thread()
+        {
+            //var firstThread = new Thread(() =>
+            //{
+            //    while (true)
+            //    {
+            //        Console.WriteLine("Thread 1");
+            //        System.Threading.Thread.Sleep(1000);
+            //    }
+            //});
+
+            //var firstThread = new Thread(() => PrintThread(1));
+
+            // Không tham số
+            //var firstThread = new Thread(new ThreadStart(PrintThread));
+
+            var firstThread = new Thread(new ParameterizedThreadStart(PrintThread));
+            var secondThread = new Thread(new ParameterizedThreadStart(PrintThread));
+            var thirdThread = new Thread(new ParameterizedThreadStart(PrintThread));
+
+            CancellationTokenSource cts = new CancellationTokenSource();
+
+            firstThread.Start(new ThreadParam() { Name = "1", Delay = 1000, CancellationToken = cts.Token });
+            secondThread.Start(new ThreadParam() { Name = "2", Delay = 2500, CancellationToken = cts.Token });
+            thirdThread.Start(new ThreadParam() { CancellationToken = cts.Token });
+
+            // Background Thread - Khi chương trình chính kết thúc thì các thread cũng kết thúc
+            // Foreground Thread - Khi chương trình chính kết thúc thì các thread vẫn chạy
+            //firstThread.IsBackground = true;
+            //secondThread.IsBackground = true;
+            //thirdThread.IsBackground = true;
+
+            Console.ReadLine();
+
+            cts.Cancel();
+        }
+
+        private void PrintThread(object? i)
+        {
+            //var threadParam = (ThreadParam)i; //Nếu không cast được thì sẽ báo lỗi
+            var threadParam = i as ThreadParam; //Nếu không cast được thì sẽ trả về null
+
+            if (threadParam != null)
+            {
+                while (!threadParam.CancellationToken.IsCancellationRequested)
+                {
+                    Console.WriteLine($"Thread {threadParam.Name ?? "No Name"}");
+                    System.Threading.Thread.Sleep(threadParam.Delay ?? 5000);
+                }
+            }
+        }
+
+        #endregion
+    }
+
+    public class ThreadParam
+    {
+        public string? Name { get; set; }
+        public int? Delay { get; set; }
+        public CancellationToken CancellationToken { get; set; }
     }
 }
