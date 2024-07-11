@@ -9,19 +9,19 @@ namespace Example
     {
         #region Phần 13 - Static 
 
-        public int _nonStatic = 0;
+        private int _nonStatic = 0;
         // Biến static chỉ được khởi tạo một lần duy nhất, gắn liền với class chứ không phải với instance
         // Biến static được gọi thông qua tên của class chứ không phải thông qua instance
         // Biến static được khởi tạo khi class được load vào bộ nhớ, và tồn tại cho đến khi chương trình kết thúc
-        public static int _static = 0;
+        private static int _static = 0;
 
-        public void NonStatic()
+        public void NonStaticExample()
         {
             Console.WriteLine("Static variable: " + _static);
             Console.WriteLine("Non static variable: " + _nonStatic);
         }
 
-        public static void Static()
+        public static void StaticExample()
         {
             Console.WriteLine("Static variable: " + _static);
             // Không thể truy cập biến non-static từ method static
@@ -32,7 +32,7 @@ namespace Example
 
         #region Phần 7 - Stream và File
 
-        public string _directoryTree = string.Empty;
+        private string _directoryTree = string.Empty;
 
         public void GetDirectoryAndFile()
         {
@@ -112,7 +112,7 @@ namespace Example
 
         #region Phần 9 - Biểu thức Lamda
 
-        public void Lamda()
+        public void LamdaExample()
         {
             Func<int, int, int> sum = (a, b) => a + b;
             Action<string> print = (string message) => Console.WriteLine(message);
@@ -201,7 +201,7 @@ namespace Example
 
         #region Phần 30 - Thread
 
-        public void Thread()
+        public void ThreadExample()
         {
             //var firstThread = new Thread(() =>
             //{
@@ -250,6 +250,72 @@ namespace Example
                     Console.WriteLine($"Thread {threadParam.Name ?? "No Name"}");
                     System.Threading.Thread.Sleep(threadParam.Delay ?? 5000);
                 }
+            }
+        }
+
+        #endregion
+
+        #region Phần 32 - Semaphore 
+
+        // Bài toán:
+        // Có n máy chuyển hàng tự động có nhiệm vụ chuyển hàng từ kho vào xe tải.
+        // Mỗi xe tải chỉ chứa được một số lượng hàng nhất định.
+        // Nếu số lượng hàng cần chuyển để đầy xe tải nhỏ hơn n
+        // và tất cả máy chuyển hàng đều chuyển hàng vào xe tải thì sẽ là lỗi.
+
+        private static Random random = new Random();
+        private static int CurrentItemNumber = 0;
+        private static int MaxItemNumber = 10;
+        private static Semaphore semaphore = new Semaphore(MaxItemNumber, MaxItemNumber);
+        private AutoResetEvent moveDoneEvent = new AutoResetEvent(false);
+
+        public void SemaphoreExample()
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                var thread = new Thread(new ParameterizedThreadStart(MoveItemThread)) { IsBackground = true };
+                thread.Start(i.ToString());
+            }
+
+            new Thread(MoveDone) { IsBackground = true }.Start();
+        }
+
+        public void MoveItemThread(object i)
+        {
+            var threadNumber = i.ToString();
+
+            while (true)
+            {
+                semaphore.WaitOne();
+
+                Console.WriteLine($"{threadNumber} - Moving item ...");
+
+                Thread.Sleep(random.Next(250, 500));
+                MoveItem();
+                Thread.Sleep(random.Next(2500, 5000));
+
+                Console.WriteLine($"{threadNumber} - DONE ...\n");
+            }
+        }
+
+        public void MoveItem()
+        {
+            Console.WriteLine($"Current item number: {++CurrentItemNumber}");
+
+            if (CurrentItemNumber == MaxItemNumber)
+                moveDoneEvent.Set();
+        }
+
+        public void MoveDone()
+        {
+            while (true)
+            {
+                moveDoneEvent.WaitOne();
+
+                Console.WriteLine("Move full item, DONE ...\n");
+
+                CurrentItemNumber = 0;
+                semaphore.Release(MaxItemNumber);
             }
         }
 

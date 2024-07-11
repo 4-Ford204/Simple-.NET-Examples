@@ -6,7 +6,8 @@ namespace Example
     {
         public static void Main(string[] args)
         {
-            var elasticsearch = new Elasticsearch();
+            Lesson lesson = new Lesson();
+            lesson.SemaphoreExample();
             Console.ReadLine();
         }
     }
