@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Example
 {
@@ -86,7 +88,7 @@ namespace Example
             return _directoryTree;
         }
 
-        public void DirectoryTreeRecursion(DirectoryInfo dir, int level)
+        private void DirectoryTreeRecursion(DirectoryInfo dir, int level)
         {
             var directories = dir.GetDirectories();
             int tab = level;
@@ -140,7 +142,7 @@ namespace Example
             return assembly;
         }
 
-        public void InspectType(Assembly assembly)
+        private void InspectType(Assembly assembly)
         {
             foreach (var type in assembly.GetTypes())
             {
@@ -150,7 +152,7 @@ namespace Example
             }
         }
 
-        public void InspectField(Type type)
+        private void InspectField(Type type)
         {
             foreach (var field in type.GetFields())
             {
@@ -158,7 +160,7 @@ namespace Example
             }
         }
 
-        public void InspectMethod(Type type)
+        private void InspectMethod(Type type)
         {
             foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
             {
@@ -257,11 +259,13 @@ namespace Example
 
         #region Phần 32 - Semaphore 
 
-        // Bài toán:
-        // Có n máy chuyển hàng tự động có nhiệm vụ chuyển hàng từ kho vào xe tải.
-        // Mỗi xe tải chỉ chứa được một số lượng hàng nhất định.
-        // Nếu số lượng hàng cần chuyển để đầy xe tải nhỏ hơn n
-        // và tất cả máy chuyển hàng đều chuyển hàng vào xe tải thì sẽ là lỗi.
+        /*
+         * Bài toán:
+         * Có n máy chuyển hàng tự động có nhiệm vụ chuyển hàng từ kho vào xe tải.
+         * Mỗi xe tải chỉ chứa được một số lượng hàng nhất định.
+         * Nếu số lượng hàng cần chuyển để đầy xe tải nhỏ hơn n
+         * và tất cả máy chuyển hàng đều chuyển hàng vào xe tải thì sẽ là lỗi.
+         */
 
         private static Random random = new Random();
         private static int CurrentItemNumber = 0;
@@ -280,7 +284,7 @@ namespace Example
             new Thread(MoveDone) { IsBackground = true }.Start();
         }
 
-        public void MoveItemThread(object i)
+        private void MoveItemThread(object i)
         {
             var threadNumber = i.ToString();
 
@@ -298,7 +302,7 @@ namespace Example
             }
         }
 
-        public void MoveItem()
+        private void MoveItem()
         {
             Console.WriteLine($"Current item number: {++CurrentItemNumber}");
 
@@ -306,7 +310,7 @@ namespace Example
                 moveDoneEvent.Set();
         }
 
-        public void MoveDone()
+        private void MoveDone()
         {
             while (true)
             {
@@ -317,6 +321,120 @@ namespace Example
                 CurrentItemNumber = 0;
                 semaphore.Release(MaxItemNumber);
             }
+        }
+
+        #endregion
+
+        #region Phần 34 - Xử lý bất đồng bộ với hàm Async
+
+        public async Task AsyncExample()
+        {
+            Sync();
+            await AwaitButSync();
+            await Async();
+            await ArrayTaskAsync();
+        }
+
+        private void Sync()
+        {
+            var stopwatch = new Stopwatch();
+            Console.WriteLine("Synchronous Start ...\n");
+            stopwatch.Start();
+
+            FirstTaskSync();
+            SecondTaskSync();
+            ThirdTaskSync();
+
+            stopwatch.Stop();
+            Console.WriteLine($"\nSynchronous Done in {stopwatch.Elapsed}\n");
+        }
+
+        private async Task AwaitButSync()
+        {
+            var stopwatch = new Stopwatch();
+            Console.WriteLine("Await Synchronous Start ...\n");
+            stopwatch.Start();
+
+            await FirstTaskAsync();
+            await SecondTaskAsync();
+            await ThirdTaskAsync();
+
+            stopwatch.Stop();
+            Console.WriteLine($"\nAwait Synchronous Done in {stopwatch.Elapsed}\n");
+        }
+
+        private async Task Async()
+        {
+            var stopwatch = new Stopwatch();
+            Console.WriteLine("Asynchronous Start ...\n");
+            stopwatch.Start();
+
+            var firstTask = FirstTaskAsync();
+            var secondTask = SecondTaskAsync();
+            var thirdTask = ThirdTaskAsync();
+
+            await firstTask;
+            await secondTask;
+            await thirdTask;
+
+            stopwatch.Stop();
+            Console.WriteLine($"\nAsynchronous Done in {stopwatch.Elapsed}\n");
+        }
+
+        private async Task ArrayTaskAsync()
+        {
+            var stopwatch = new Stopwatch();
+            Console.WriteLine("Array Task Asynchronous Start ...\n");
+            stopwatch.Start();
+
+            Task[] arrayTask = new Task[] { FirstTaskAsync(), SecondTaskAsync(), ThirdTaskAsync() };
+            //Task.WaitAll(arrayTask);
+            await Task.WhenAll(arrayTask);
+
+            stopwatch.Stop();
+            Console.WriteLine($"\nArray Task Asynchronous Done in {stopwatch.Elapsed}\n");
+        }
+
+        private void FirstTaskSync()
+        {
+            Console.WriteLine("First Task Sync Start ...");
+            Task.Delay(1000).Wait();
+            Console.WriteLine("First Task Sync Done ...");
+        }
+
+        private void SecondTaskSync()
+        {
+            Console.WriteLine("Second Task Sync Start ...");
+            Task.Delay(2000).Wait();
+            Console.WriteLine("Second Task Sync Done ...");
+        }
+
+        private void ThirdTaskSync()
+        {
+            Console.WriteLine("Third Task Sync Start ...");
+            Task.Delay(3000).Wait();
+            Console.WriteLine("Third Task Sync Done ...");
+        }
+
+        private async Task FirstTaskAsync()
+        {
+            Console.WriteLine("First Task Async Start ...");
+            await Task.Delay(1000);
+            Console.WriteLine("First Task Async Done ...");
+        }
+
+        private async Task SecondTaskAsync()
+        {
+            Console.WriteLine("Second Task Async Start ...");
+            await Task.Delay(2000);
+            Console.WriteLine("Second Task Async Done ...");
+        }
+
+        private async Task ThirdTaskAsync()
+        {
+            Console.WriteLine("Third Task Async Start ...");
+            await Task.Delay(3000);
+            Console.WriteLine("Third Task Async Done ...");
         }
 
         #endregion

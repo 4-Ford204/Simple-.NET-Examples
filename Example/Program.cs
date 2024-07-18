@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Example
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Lesson lesson = new Lesson();
-            lesson.SemaphoreExample();
+            await lesson.AsyncExample();
             Console.ReadLine();
         }
     }
