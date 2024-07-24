@@ -438,6 +438,18 @@ namespace Example
         }
 
         #endregion
+
+        #region Phần 35 - Task
+
+        public async void TaskExample()
+        {
+            Console.WriteLine(await TaskMethod(0));
+        }
+
+        private Task<double> TaskMethod(int n)
+            => Task.FromResult(n < 0 ? 0.0 : Math.Pow(10, n));
+
+        #endregion
     }
 
     public class ThreadParam
