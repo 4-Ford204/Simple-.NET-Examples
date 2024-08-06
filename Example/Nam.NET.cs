@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -443,11 +444,63 @@ namespace Example
 
         public async void TaskExample()
         {
-            Console.WriteLine(await TaskMethod(0));
+            //Console.WriteLine(await TaskMethod(0));
+
+            List<Task> taskQueue = new List<Task>();
+            int max = 50;
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            using (var semaphore = new SemaphoreSlim(max))
+            {
+                for (int i = 1; i <= 100; i++)
+                {
+                    await semaphore.WaitAsync();
+                    var number = i;
+
+                    try
+                    {
+                        taskQueue.Add(Task.Run(async () =>
+                        {
+                            await UnitTask(number);
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Task [{number}]: {ex.Message}");
+                    }
+                    finally
+                    {
+                        semaphore.Release();
+                    }
+                }
+
+                if (taskQueue.Count == max)
+                {
+                    await Task.WhenAll(taskQueue.ToArray());
+                    taskQueue.Clear();
+                }
+            }
+
+            if (taskQueue.Count > 0) await Task.WhenAll(taskQueue.ToArray());
+
+            stopwatch.Stop();
+            Console.WriteLine($"Finished Task Queue ... {stopwatch.ElapsedMilliseconds}ms");
         }
 
         private Task<double> TaskMethod(int n)
             => Task.FromResult(n < 0 ? 0.0 : Math.Pow(10, n));
+
+        private async Task<int> UnitTask(int number)
+        {
+            Random random = new Random();
+
+            var executeTime = random.Next(1000, 10000);
+            await Task.Delay(executeTime);
+            Console.WriteLine($"Task [{number}] Done ... {executeTime}ms");
+
+            return executeTime;
+        }
 
         #endregion
     }
