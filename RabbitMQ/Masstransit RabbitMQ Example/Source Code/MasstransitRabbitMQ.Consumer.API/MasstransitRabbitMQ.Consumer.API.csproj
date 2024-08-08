@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MassTransit" Version="8.2.3" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
+		<PackageReference Include="MediatR" Version="12.4.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MasstransitRabbitMQ.Contract\MasstransitRabbitMQ.Contract.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="MessageBus\Consumers\Commands\" />
+		<Folder Include="UseCases\Commands\" />
+	</ItemGroup>
+
+</Project>
