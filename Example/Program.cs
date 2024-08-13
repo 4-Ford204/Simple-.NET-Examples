@@ -6,9 +6,8 @@ namespace Example
     {
         public static void Main(string[] args)
         {
-            Lesson lesson = new Lesson();
-            lesson.TaskExample();
-            Console.ReadLine();
+            Delegate @delegate = new Delegate();
+            @delegate.DelegateExample();
         }
     }
 }

@@ -10,29 +10,6 @@ namespace Example
 {
     public class Lesson
     {
-        #region Phần 13 - Static 
-
-        private int _nonStatic = 0;
-        // Biến static chỉ được khởi tạo một lần duy nhất, gắn liền với class chứ không phải với instance
-        // Biến static được gọi thông qua tên của class chứ không phải thông qua instance
-        // Biến static được khởi tạo khi class được load vào bộ nhớ, và tồn tại cho đến khi chương trình kết thúc
-        private static int _static = 0;
-
-        public void NonStaticExample()
-        {
-            Console.WriteLine("Static variable: " + _static);
-            Console.WriteLine("Non static variable: " + _nonStatic);
-        }
-
-        public static void StaticExample()
-        {
-            Console.WriteLine("Static variable: " + _static);
-            // Không thể truy cập biến non-static từ method static
-            // Console.WriteLine("Non static variable: " + _nonStatic);
-        }
-
-        #endregion
-
         #region Phần 7 - Stream và File
 
         private string _directoryTree = string.Empty;
@@ -120,6 +97,29 @@ namespace Example
             Func<int, int, int> sum = (a, b) => a + b;
             Action<string> print = (string message) => Console.WriteLine(message);
             var compare = object (int a, int b) => a > b ? true : "False";
+        }
+
+        #endregion
+
+        #region Phần 13 - Static 
+
+        private int _nonStatic = 0;
+        // Biến static chỉ được khởi tạo một lần duy nhất, gắn liền với class chứ không phải với instance
+        // Biến static được gọi thông qua tên của class chứ không phải thông qua instance
+        // Biến static được khởi tạo khi class được load vào bộ nhớ, và tồn tại cho đến khi chương trình kết thúc
+        private static int _static = 0;
+
+        public void NonStaticExample()
+        {
+            Console.WriteLine("Static variable: " + _static);
+            Console.WriteLine("Non static variable: " + _nonStatic);
+        }
+
+        public static void StaticExample()
+        {
+            Console.WriteLine("Static variable: " + _static);
+            // Không thể truy cập biến non-static từ method static
+            // Console.WriteLine("Non static variable: " + _nonStatic);
         }
 
         #endregion
