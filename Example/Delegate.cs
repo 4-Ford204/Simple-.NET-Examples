@@ -22,7 +22,7 @@ namespace Example
             operation(2, 1);
 
             operation -= Addition;
-            operation(2, 0);
+            operation.Invoke(2, 0);
 
             LaunchOperation(operation);
 
