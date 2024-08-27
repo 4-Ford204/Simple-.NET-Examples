@@ -512,15 +512,16 @@ namespace Example
         {
             ParallelLoopResult result = Parallel.For(1, 50, RunParallelTask);
             Console.WriteLine($"Is Completed: {result.IsCompleted}");
+            Console.ReadLine();
         }
 
-        private void RunParallelTask(int i)
+        private async void RunParallelTask(int i)
         {
             Console.WriteLine($"{$"Start {i,4}",-10}\t" +
                 $"{$"Task {Task.CurrentId,4}"}\t" +
                 $"Thread {Thread.CurrentThread.ManagedThreadId,4}");
 
-            Task.Delay(parallelRandom.Next(1000, 5000)).Wait();
+            await Task.Delay(parallelRandom.Next(1000, 5000));
 
             Console.WriteLine($"{$"Finish {i,4}",-10}\t" +
                 $"{$"Task {Task.CurrentId,4}"}\t" +
