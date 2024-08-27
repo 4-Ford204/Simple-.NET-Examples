@@ -18,8 +18,10 @@
     <li>Semaphore</li>
     <li>Asynchronous with Async Function</li>
     <li>Task</li>
+    <li>Parallel</li>
    </ul>
   </li>
+  <li>Delegate</li>
   <li>Elasticsearch</li>
   <li>Redis</li>
  </ul>
