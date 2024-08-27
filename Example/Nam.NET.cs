@@ -503,6 +503,31 @@ namespace Example
         }
 
         #endregion
+
+        #region Parallel
+
+        private Random parallelRandom = new Random();
+
+        public void ParallelExample()
+        {
+            ParallelLoopResult result = Parallel.For(1, 50, RunParallelTask);
+            Console.WriteLine($"Is Completed: {result.IsCompleted}");
+        }
+
+        private void RunParallelTask(int i)
+        {
+            Console.WriteLine($"{$"Start {i,4}",-10}\t" +
+                $"{$"Task {Task.CurrentId,4}"}\t" +
+                $"Thread {Thread.CurrentThread.ManagedThreadId,4}");
+
+            Task.Delay(parallelRandom.Next(1000, 5000)).Wait();
+
+            Console.WriteLine($"{$"Finish {i,4}",-10}\t" +
+                $"{$"Task {Task.CurrentId,4}"}\t" +
+                $"Thread {Thread.CurrentThread.ManagedThreadId,4}");
+        }
+
+        #endregion
     }
 
     public class ThreadParam
