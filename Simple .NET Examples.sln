@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasstransitRabbitMQ.Produce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasstransitRabbitMQ.Consumer.API", "RabbitMQ\Masstransit RabbitMQ Example\Source Code\MasstransitRabbitMQ.Consumer.API\MasstransitRabbitMQ.Consumer.API.csproj", "{43A808B5-669B-46E7-BA22-7DF31006AF17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redis", "Redis\Redis.csproj", "{D6F240E6-B742-48CD-9732-B8541B0ECFF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redis", "Redis\Redis.csproj", "{D6F240E6-B742-48CD-9732-B8541B0ECFF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
