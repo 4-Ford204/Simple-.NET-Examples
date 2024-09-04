@@ -27,15 +27,20 @@
  </ul>
 </details>
 
+## ![Elasticsearch][elasticsearch-shield]
+
+Searching with Web API using Elasticsearch
+
 ## ![RabbitMQ][rabbitmq-shield]
 
-- **Publisher** : Producer console application.
-- **Subscriber** : Consumer console application.
-- **Masstransit RabbitMQ** : Web API about how to use Masstransit RabbitMQ.
+- **Publisher** : Producer Console Application
+- **Subscriber** : Consumer Console Application
+- **Masstransit RabbitMQ** : Masstransit RabbitMQ Web API
 
 ## ![Redis][redis-shield]
 
-Web API about how to use Redis to caching data.
+Caching with Web API using Redis
 
+[elasticsearch-shield]: https://img.shields.io/badge/Elastic_Search-005571?style=for-the-badge&logo=elasticsearch&logoColor=white
 [rabbitmq-shield]: https://img.shields.io/badge/-rabbitmq-%23FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white
 [redis-shield]: https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white
