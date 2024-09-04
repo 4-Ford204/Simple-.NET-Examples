@@ -28,6 +28,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasstransitRabbitMQ.Consume
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redis", "Redis\Redis.csproj", "{D6F240E6-B742-48CD-9732-B8541B0ECFF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch", "Elasticsearch\Elasticsearch.csproj", "{AA17AAAB-8E57-492A-BDE0-B51B4DC1F694}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{D6F240E6-B742-48CD-9732-B8541B0ECFF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6F240E6-B742-48CD-9732-B8541B0ECFF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6F240E6-B742-48CD-9732-B8541B0ECFF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA17AAAB-8E57-492A-BDE0-B51B4DC1F694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA17AAAB-8E57-492A-BDE0-B51B4DC1F694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA17AAAB-8E57-492A-BDE0-B51B4DC1F694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA17AAAB-8E57-492A-BDE0-B51B4DC1F694}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
