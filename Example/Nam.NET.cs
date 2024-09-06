@@ -66,6 +66,9 @@ namespace Example
             return _directoryTree;
         }
 
+        public string[] GetFiles(string path)
+            => Directory.GetFiles(path, "*", SearchOption.AllDirectories);
+
         private void DirectoryTreeRecursion(DirectoryInfo dir, int level)
         {
             var directories = dir.GetDirectories();
