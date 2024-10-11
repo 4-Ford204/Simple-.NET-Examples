@@ -7,7 +7,7 @@ namespace Example
         public static void Main(string[] args)
         {
             Lesson lesson = new Lesson();
-            lesson.ParallelExample();
+            lesson.ThreadExample();
         }
     }
 }

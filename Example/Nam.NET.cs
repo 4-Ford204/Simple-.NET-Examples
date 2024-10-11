@@ -207,6 +207,8 @@ namespace Example
 
         #region Phần 30 - Thread
 
+        private int printNumber = 0;
+
         public void ThreadExample()
         {
             //var firstThread = new Thread(() =>
@@ -253,8 +255,10 @@ namespace Example
             {
                 while (!threadParam.CancellationToken.IsCancellationRequested)
                 {
+                    // THREAD PRINT ORDER có thể bị lặp và không theo thứ tự
+                    Console.WriteLine($"THREAD PRINT ORDER {++printNumber}");
                     Console.WriteLine($"Thread {threadParam.Name ?? "No Name"}");
-                    System.Threading.Thread.Sleep(threadParam.Delay ?? 5000);
+                    Thread.Sleep(threadParam.Delay ?? 5000);
                 }
             }
         }
