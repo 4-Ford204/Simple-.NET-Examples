@@ -5,7 +5,7 @@ using Redis.Services;
 namespace Redis.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("redis/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -22,9 +22,12 @@ namespace Redis.Controllers
             _responseCacheService = responseCacheService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet(Name = "EnsureConnection")]
+        public string EnsureConnection() => "Redis - Weather Forecast";
+
+        [HttpGet("GetWeatherForecast")]
         [Cache(1000)]
-        public async Task<IActionResult> Get(string keyword = null, int pageIndex = 1, int pageSize = 5)
+        public async Task<IActionResult> Get(string? keyword = null, int pageIndex = 1, int pageSize = 5)
         {
             var result = Summaries
                 .Select(x => new WeatherForecast() { Name = x })
@@ -36,7 +39,7 @@ namespace Redis.Controllers
             return Ok(result);
         }
 
-        [HttpGet("DeleteWeatherForecast")]
+        [HttpDelete("DeleteWeatherForecast")]
         public async Task<IActionResult> Delete()
         {
             await _responseCacheService.RemoveCacheResponseAsync("/WeatherForecast");

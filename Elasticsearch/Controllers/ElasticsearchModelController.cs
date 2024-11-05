@@ -4,7 +4,7 @@ using Nest;
 namespace Elasticsearch.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("elasticsearch/[controller]")]
     public class ElasticsearchModelController : ControllerBase
     {
         private readonly IElasticClient _elasticClient;
@@ -15,6 +15,9 @@ namespace Elasticsearch.Controllers
             _elasticClient = elasticClient;
             _hostingEnvironment = hostingEnvironment;
         }
+
+        [HttpGet]
+        public string EnsureConnection() => "Elasticsearch - Elasticsearch Model";
 
         [HttpGet, Route("Index/{keyword}")]
         public async Task<IActionResult> Index(string keyword)

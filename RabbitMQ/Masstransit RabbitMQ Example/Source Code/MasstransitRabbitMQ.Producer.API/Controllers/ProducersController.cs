@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MasstransitRabbitMQ.Producer.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("rabbitmq/[controller]")]
     public class ProducersController : ControllerBase
     {
         private readonly IPublishEndpoint _publishEndpoint;
@@ -15,6 +15,9 @@ namespace MasstransitRabbitMQ.Producer.API.Controllers
         {
             _publishEndpoint = publishEndpoint;
         }
+
+        [HttpGet]
+        public string EnsureConnection() => "RabbitMQ - Producers";
 
         [HttpPost(Name = "publish-sms-notification")]
         public async Task<IActionResult> PublishSMSNotificationEvent()

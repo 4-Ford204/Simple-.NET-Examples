@@ -1,0 +1,27 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7182"
+  },
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/{url}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7148
+        },
+        {
+          "Host": "localhost",
+          "Port": 7173
+        },
+        {
+          "Host": "localhost",
+          "Port": 7181
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/{url}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    }
+  ]
+}
