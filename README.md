@@ -27,6 +27,16 @@
  </ul>
 </details>
 
+## ![Ocelot][ocelot-shield]
+
+<details>
+ <summary>API Gateway using Ocelot</summary>
+ <ul>
+  <li>Routing</li>
+  <li>Rate Limiting</li>
+ </ul>
+</details>
+
 ## ![Elasticsearch][elasticsearch-shield]
 
 Searching with Web API using Elasticsearch
@@ -41,6 +51,7 @@ Searching with Web API using Elasticsearch
 
 Caching with Web API using Redis
 
+[ocelot-shield]: https://img.shields.io/badge/ocelot-000000?style=for-the-badge&logo=ocelot&logoColor=white
 [elasticsearch-shield]: https://img.shields.io/badge/Elastic_Search-005571?style=for-the-badge&logo=elasticsearch&logoColor=white
 [rabbitmq-shield]: https://img.shields.io/badge/-rabbitmq-%23FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white
 [redis-shield]: https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white
