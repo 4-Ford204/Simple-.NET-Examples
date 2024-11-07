@@ -22,5 +22,22 @@
 
             return nums;
         }
+
+        public int[] SelectionSort(int[] nums)
+        {
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                int min = i;
+
+                for (int j = i + 1; j < nums.Length; j++)
+                {
+                    if (nums[min] > nums[j]) min = j;
+                }
+
+                (nums[i], nums[min]) = (nums[min], nums[i]);
+            }
+
+            return nums;
+        }
     }
 }
