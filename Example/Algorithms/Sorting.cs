@@ -1,18 +1,40 @@
-﻿namespace Example.Algorithms
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+using System;
+
+namespace Example.Algorithms
 {
+    [SimpleJob(baseline: true)]
+    [MemoryDiagnoser]
     public class Sorting
     {
-        public int[] BubbleSort(int[] nums)
+        public int[] Numbers { get; set; }
+
+        public Sorting()
         {
-            for (int i = 0; i < nums.Length; i++)
+            Numbers = new int[1000];
+            Random random = new Random();
+
+            for (int i = 0; i < 1000; i++) Numbers[i] = random.Next();
+        }
+
+        public Sorting(int[] numbers)
+        {
+            Numbers = numbers;
+        }
+
+        [Benchmark]
+        public int[] BubbleSort()
+        {
+            for (int i = 0; i < Numbers.Length; i++)
             {
                 bool swap = false;
 
-                for (int j = 0; j < nums.Length - i - 1; j++)
+                for (int j = 0; j < Numbers.Length - i - 1; j++)
                 {
-                    if (nums[j] > nums[j + 1])
+                    if (Numbers[j] > Numbers[j + 1])
                     {
-                        (nums[j + 1], nums[j]) = (nums[j], nums[j + 1]);
+                        (Numbers[j + 1], Numbers[j]) = (Numbers[j], Numbers[j + 1]);
                         swap = true;
                     }
                 }
@@ -20,24 +42,47 @@
                 if (!swap) break;
             }
 
-            return nums;
+            return Numbers;
         }
 
-        public int[] SelectionSort(int[] nums)
+        [Benchmark]
+        public int[] InsertionSort()
         {
-            for (int i = 0; i < nums.Length - 1; i++)
+            for (int i = 1; i < Numbers.Length; i++)
+            {
+                for (int j = i; j > 0; j--)
+                {
+                    if (Numbers[j] < Numbers[j - 1])
+                        (Numbers[j], Numbers[j - 1]) = (Numbers[j - 1], Numbers[j]);
+                    else
+                        break;
+                }
+            }
+
+            return Numbers;
+        }
+
+        [Benchmark]
+        public int[] SelectionSort()
+        {
+            for (int i = 0; i < Numbers.Length - 1; i++)
             {
                 int min = i;
 
-                for (int j = i + 1; j < nums.Length; j++)
+                for (int j = i + 1; j < Numbers.Length; j++)
                 {
-                    if (nums[min] > nums[j]) min = j;
+                    if (Numbers[min] > Numbers[j]) min = j;
                 }
 
-                (nums[i], nums[min]) = (nums[min], nums[i]);
+                (Numbers[i], Numbers[min]) = (Numbers[min], Numbers[i]);
             }
 
-            return nums;
+            return Numbers;
+        }
+
+        public static void RunBenchmark()
+        {
+            BenchmarkRunner.Run<Sorting>();
         }
     }
 }
