@@ -5,41 +5,44 @@
 ## 📖 Examples
 
 <details>
- <summary>Console Applications About These Topics</summary>
+ <summary><b>Console Applications</b> About These Topics</summary>
  <ul>
-  <li>
-   <b>.NET Documents</b>
-   <ul>
-    <li>Stream and File</li>
-    <li>Lamda Expresion</li>
-    <li>Static</li>
-    <li>Reflection</li>
-    <li>Thread</li>
-    <li>Semaphore</li>
-    <li>Asynchronous with Async Function</li>
-    <li>Task</li>
-    <li>Parallel</li>
-   </ul>
-  </li>
   <li>Delegate</li>
   <li>Elasticsearch</li>
   <li>Redis</li>
+  <li>
+   <details margin=0>
+    <summary><b>.NET Documents</b></summary>
+    <ul>
+     <li>Stream and File</li>
+     <li>Lamda Expresion</li>
+     <li>Static</li>
+     <li>Reflection</li>
+     <li>Thread</li>
+     <li>Semaphore</li>
+     <li>Asynchronous with Async Function</li>
+     <li>Task</li>
+     <li>Parallel</li>
+    </ul>
+   </details>
+  </li>
  </ul>
 </details>
 
 ## ![Ocelot][ocelot-shield]
 
 <details>
- <summary>API Gateway using Ocelot</summary>
+ <summary><b>API Gateway</b> using <b>Ocelot</b></summary>
  <ul>
   <li>Routing</li>
+  <li>Authentication</li>
   <li>Rate Limiting</li>
  </ul>
 </details>
 
 ## ![Elasticsearch][elasticsearch-shield]
 
-Searching with Web API using Elasticsearch
+Searching with <b>Web API</b> using <b>Elasticsearch</b>
 
 ## ![RabbitMQ][rabbitmq-shield]
 
@@ -49,7 +52,7 @@ Searching with Web API using Elasticsearch
 
 ## ![Redis][redis-shield]
 
-Caching with Web API using Redis
+Caching with <b>Web API</b> using <b>Redis</b>
 
 [ocelot-shield]: https://img.shields.io/badge/ocelot-000000?style=for-the-badge&logo=ocelot&logoColor=white
 [elasticsearch-shield]: https://img.shields.io/badge/Elastic_Search-005571?style=for-the-badge&logo=elasticsearch&logoColor=white
