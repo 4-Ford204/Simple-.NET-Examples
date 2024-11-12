@@ -34,7 +34,7 @@ namespace Example.Algorithms
                 {
                     if (Numbers[j] > Numbers[j + 1])
                     {
-                        (Numbers[j + 1], Numbers[j]) = (Numbers[j], Numbers[j + 1]);
+                        (Numbers[j], Numbers[j + 1]) = (Numbers[j + 1], Numbers[j]);
                         swap = true;
                     }
                 }
@@ -53,11 +53,19 @@ namespace Example.Algorithms
                 for (int j = i; j > 0; j--)
                 {
                     if (Numbers[j] < Numbers[j - 1])
-                        (Numbers[j], Numbers[j - 1]) = (Numbers[j - 1], Numbers[j]);
+                        (Numbers[j - 1], Numbers[j]) = (Numbers[j], Numbers[j - 1]);
                     else
                         break;
                 }
             }
+
+            return Numbers;
+        }
+
+        [Benchmark]
+        public int[] QuickSort()
+        {
+            SortingExtension.QuickSortExtension(Numbers, 0, Numbers.Length - 1);
 
             return Numbers;
         }
@@ -79,10 +87,36 @@ namespace Example.Algorithms
 
             return Numbers;
         }
+    }
 
-        public static void RunBenchmark()
+    public static class SortingExtension
+    {
+        public static void QuickSortExtension(int[] numbers, int left, int right)
         {
-            BenchmarkRunner.Run<Sorting>();
+            if (left < right)
+            {
+                int middle = new Func<int>(() =>
+                {
+                    int tracking = left - 1;
+
+                    for (int i = left; i < right; i++)
+                    {
+                        if (numbers[right] > numbers[i])
+                        {
+                            tracking++;
+                            (numbers[i], numbers[tracking]) = (numbers[tracking], numbers[i]);
+                        }
+                    }
+
+                    (numbers[right], numbers[++tracking]) = (numbers[tracking], numbers[right]);
+                    return tracking;
+                })();
+
+                QuickSortExtension(numbers, left, middle - 1);
+                QuickSortExtension(numbers, middle + 1, right);
+            }
         }
+
+        public static void RunBenchmark() => BenchmarkRunner.Run<Sorting>();
     }
 }
