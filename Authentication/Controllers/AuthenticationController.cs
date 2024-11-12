@@ -34,19 +34,22 @@ namespace Authentication.Controllers
                     generateTokenDTO.Password.Equals(defaultGenerateToken.Password))
                 {
                     var time = DateTime.UtcNow;
-                    var tokenDescriptor = new JwtSecurityToken(
-                        claims:
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(
                         [
                             new Claim(JwtRegisteredClaimNames.Name, generateTokenDTO.Name),
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                             new Claim(JwtRegisteredClaimNames.Iat, time.ToUniversalTime().ToString(), ClaimValueTypes.Integer64)
-                        ],
-                        notBefore: time,
-                        expires: time.Add(TimeSpan.FromSeconds(int.Parse(Configuration["JWTConfiguration:Expires"] ?? "300"))),
-                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTConfiguration:Key"] ?? "")), SecurityAlgorithms.HmacSha256)
-                    );
+                        ]),
+                        NotBefore = time,
+                        Expires = time.Add(TimeSpan.FromSeconds(int.Parse(Configuration["JWTConfiguration:Expires"] ?? "300"))),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTConfiguration:Key"] ?? "")), SecurityAlgorithms.HmacSha256)
+                    };
+                    var token = tokenHandler.CreateToken(tokenDescriptor);
 
-                    return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor) });
+                    return Ok(new { Token = tokenHandler.WriteToken(token) });
                 }
             }
 
