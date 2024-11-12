@@ -23,6 +23,8 @@ namespace Elasticsearch.Installers
             CreateIndex(client, elasticsearchConfiguration.DefaultIndex);
         }
 
+        public void ConfigureRequestPiplineAsync(WebApplication app) { }
+
         private void AddDefaultMappings(ConnectionSettings settings)
         {
             //settings.DefaultMappingFor<ElasticsearchModel>(model => model.Ignore(x => x.Description).Ignore(x => x.User));

@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nest;
 
 namespace Elasticsearch.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("elasticsearch/[controller]")]
     public class ElasticsearchModelController : ControllerBase
