@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Example
+namespace Example.Learning
 {
     public class Delegate
     {

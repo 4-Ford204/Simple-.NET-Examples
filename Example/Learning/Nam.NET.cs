@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Example
+namespace Example.Learning
 {
     public class Lesson
     {
@@ -79,7 +79,7 @@ namespace Example
             {
                 foreach (var directory in directories)
                 {
-                    _directoryTree += string.Concat(new String('\t', tab), $"|-{directory.Name}\n");
+                    _directoryTree += string.Concat(new string('\t', tab), $"|-{directory.Name}\n");
                     DirectoryTreeRecursion(directory, tab + 1);
                 }
             }
@@ -87,7 +87,7 @@ namespace Example
             var files = dir.GetFiles();
             foreach (var file in files)
             {
-                _directoryTree += string.Concat(new String('\t', tab), $"|-{file.Name}\n");
+                _directoryTree += string.Concat(new string('\t', tab), $"|-{file.Name}\n");
             }
         }
 
@@ -98,7 +98,7 @@ namespace Example
         public void LamdaExample()
         {
             Func<int, int, int> sum = (a, b) => a + b;
-            Action<string> print = (string message) => Console.WriteLine(message);
+            Action<string> print = (message) => Console.WriteLine(message);
             var compare = object (int a, int b) => a > b ? true : "False";
         }
 
@@ -133,7 +133,7 @@ namespace Example
         /// Lấy thông tin của một Assembly
         /// </summary>
         /// <param name="fileName">Đường dẫn đến Assembly (file đuôi dll)</param>
-        public Assembly? InspectAssembly(string fileName)
+        public Assembly InspectAssembly(string fileName)
         {
             var assembly = Assembly.LoadFile(fileName);
 
@@ -246,7 +246,7 @@ namespace Example
             cts.Cancel();
         }
 
-        private void PrintThread(object? i)
+        private void PrintThread(object i)
         {
             //var threadParam = (ThreadParam)i; //Nếu không cast được thì sẽ báo lỗi
             var threadParam = i as ThreadParam; //Nếu không cast được thì sẽ trả về null
@@ -540,7 +540,7 @@ namespace Example
 
     public class ThreadParam
     {
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public int? Delay { get; set; }
         public CancellationToken CancellationToken { get; set; }
     }
