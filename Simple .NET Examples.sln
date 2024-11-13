@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elasticsearch", "Elasticsea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGateway", "OcelotGateway\OcelotGateway.csproj", "{6C14551B-40E8-4065-95CF-DC299C374DBE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication", "Authentication\Authentication.csproj", "{33A127AA-FB97-454E-A574-A6CB0088C2FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{6C14551B-40E8-4065-95CF-DC299C374DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C14551B-40E8-4065-95CF-DC299C374DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C14551B-40E8-4065-95CF-DC299C374DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33A127AA-FB97-454E-A574-A6CB0088C2FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A127AA-FB97-454E-A574-A6CB0088C2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A127AA-FB97-454E-A574-A6CB0088C2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A127AA-FB97-454E-A574-A6CB0088C2FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
