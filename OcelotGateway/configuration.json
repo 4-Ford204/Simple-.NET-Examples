@@ -38,6 +38,9 @@
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       },
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
