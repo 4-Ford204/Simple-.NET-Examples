@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGateway", "OcelotGate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication", "Authentication\Authentication.csproj", "{33A127AA-FB97-454E-A574-A6CB0088C2FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YARPReverseProxy", "YARPReverseProxy\YARPReverseProxy.csproj", "{D690ECAA-D69C-4261-8C3D-27BB07671FDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{33A127AA-FB97-454E-A574-A6CB0088C2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33A127AA-FB97-454E-A574-A6CB0088C2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33A127AA-FB97-454E-A574-A6CB0088C2FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D690ECAA-D69C-4261-8C3D-27BB07671FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D690ECAA-D69C-4261-8C3D-27BB07671FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D690ECAA-D69C-4261-8C3D-27BB07671FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D690ECAA-D69C-4261-8C3D-27BB07671FDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
