@@ -52,12 +52,20 @@ namespace Example.Algorithms
             {
                 for (int j = i; j > 0; j--)
                 {
-                    if (Numbers[j] < Numbers[j - 1])
+                    if (Numbers[j - 1] > Numbers[j])
                         (Numbers[j - 1], Numbers[j]) = (Numbers[j], Numbers[j - 1]);
                     else
                         break;
                 }
             }
+
+            return Numbers;
+        }
+
+        [Benchmark]
+        public int[] MergeSort()
+        {
+            SortingExtension.MergeSortExtension(Numbers, 0, Numbers.Length - 1);
 
             return Numbers;
         }
@@ -91,6 +99,46 @@ namespace Example.Algorithms
 
     public static class SortingExtension
     {
+        public static void MergeSortExtension(int[] numbers, int left, int right)
+        {
+            if (left < right)
+            {
+                int middle = left + (right - left) / 2;
+
+                MergeSortExtension(numbers, left, middle);
+                MergeSortExtension(numbers, middle + 1, right);
+
+                int leftLength = middle - left + 1;
+                int rightLength = right - middle;
+                int[] leftNumbers = new int[leftLength];
+                int[] rightNumbers = new int[rightLength];
+                int i, j, k;
+
+                for (i = 0; i < leftLength; i++)
+                    leftNumbers[i] = numbers[left + i];
+                for (j = 0; j < rightLength; j++)
+                    rightNumbers[j] = numbers[middle + 1 + j];
+
+                i = 0;
+                j = 0;
+                k = left;
+
+                while (i < leftLength && j < rightLength)
+                {
+                    if (leftNumbers[i] < rightNumbers[j])
+                        numbers[k++] = leftNumbers[i++];
+                    else
+                        numbers[k++] = rightNumbers[j++];
+                }
+
+                while (i < leftLength)
+                    numbers[k++] = leftNumbers[i++];
+
+                while (j < rightLength)
+                    numbers[k++] = rightNumbers[j++];
+            }
+        }
+
         public static void QuickSortExtension(int[] numbers, int left, int right)
         {
             if (left < right)
@@ -101,7 +149,7 @@ namespace Example.Algorithms
 
                     for (int i = left; i < right; i++)
                     {
-                        if (numbers[right] > numbers[i])
+                        if (numbers[i] < numbers[right])
                         {
                             tracking++;
                             (numbers[i], numbers[tracking]) = (numbers[tracking], numbers[i]);

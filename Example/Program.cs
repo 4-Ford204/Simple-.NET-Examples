@@ -1,4 +1,4 @@
-﻿using Example.Learning;
+﻿using Example.Algorithms;
 
 namespace Example
 {
@@ -6,7 +6,7 @@ namespace Example
     {
         public static void Main(string[] args)
         {
-            BinaryOperator.Bitwise();
+            SortingExtension.RunBenchmark();
         }
     }
 }
