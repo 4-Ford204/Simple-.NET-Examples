@@ -453,6 +453,26 @@ namespace Example.Learning
         {
             //Console.WriteLine(await TaskMethod(0));
 
+            Task singleTask = new Task((object parameter) =>
+            {
+                Task.Delay((int)parameter);
+                Console.WriteLine("Single Task Done ...");
+            }, 1000);
+            singleTask.RunSynchronously();
+
+            Task<int> integerTask = Task<int>.Factory.StartNew((object parameter) =>
+            {
+                Task.Delay((int)parameter);
+                Console.WriteLine("Integer Task Done ...");
+
+                return (int)parameter;
+            }, 1000);
+
+            await Task.WhenAll(singleTask, integerTask);
+        }
+
+        private async void SemaphoreTask()
+        {
             List<Task> taskQueue = new List<Task>();
             int max = 50;
             var stopwatch = new Stopwatch();
