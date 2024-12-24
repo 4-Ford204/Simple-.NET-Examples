@@ -1,35 +1,27 @@
-﻿namespace Example.Learning
+﻿using System;
+
+namespace Example.Learning
 {
-    public class Indexer
+    public class Indexer<T>
     {
-        public static int Length { get; set; } = 'z' - 'a' + 1;
-        private char[] Chars { get; set; } = new char[Length];
+        private T[] Array { get; set; } = new T[100];
 
-        public Indexer()
-        {
-            for (int i = 0; i < Length; i++) Chars[i] = (char)('a' + i);
-        }
-
-        public char this[int index]
-        {
-            get => (index < 0 || index >= Length) ? ' ' : Chars[index];
-
-            set
-            {
-                if (index >= 0 && index < Length) Chars[index] = value;
-            }
-        }
-
-        public int this[char value]
+        public T this[int index]
         {
             get
             {
-                int index = Length;
+                if (index < 0 || index >= Array.Length)
+                    throw new IndexOutOfRangeException("Index Out Of Range Exception");
+                else
+                    return Array[index];
+            }
 
-                while (--index > 0)
-                    if (Chars[index] == value) return index;
-
-                return index;
+            set
+            {
+                if (index < 0 || index >= Array.Length)
+                    throw new IndexOutOfRangeException("Index Out Of Range Exception");
+                else
+                    Array[index] = value;
             }
         }
     }
