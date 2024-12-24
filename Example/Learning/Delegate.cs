@@ -6,6 +6,8 @@ namespace Example.Learning
     {
         delegate void Operation(float a, float b);
         delegate void EventHandler(string message);
+        delegate void Print<A, B>(A a, B b);
+        delegate C PrintOperation<A, B, C>(A a, B b);
 
         public void DelegateExample()
         {
@@ -24,7 +26,27 @@ namespace Example.Learning
             operation -= Addition;
             operation.Invoke(2, 0);
 
+            operation = Addition;
             LaunchOperation(operation);
+
+            Print<float, float> print = new Print<float, float>(Addition);
+            print.Invoke(3, 4);
+
+            PrintOperation<float, float, float> anonymousMethod = delegate (float a, float b)
+            {
+                Console.Write($"{a} + {b} = ");
+
+                return a + b;
+            };
+            Console.WriteLine(anonymousMethod.Invoke(5, 6));
+
+            PrintOperation<float, float, float> lambdaExpression = (float a, float b) =>
+            {
+                Console.Write($"{a} + {b} = ");
+
+                return a + b;
+            };
+            Console.WriteLine(lambdaExpression.Invoke(7, 8));
 
             EventPublisher eventPublisher = new EventPublisher();
             EventSubscriber eventSubscriber = new EventSubscriber();
@@ -35,23 +57,23 @@ namespace Example.Learning
 
         private void Addition(float a, float b)
         {
-            Console.WriteLine(a + b);
+            Console.WriteLine($"{a} + {b} = {a + b}");
         }
 
         private void Subtraction(float a, float b)
         {
-            Console.WriteLine(a - b);
+            Console.WriteLine($"{a} - {b} = {a - b}");
         }
 
         private void Multiplication(float a, float b)
         {
-            Console.WriteLine(a * b);
+            Console.WriteLine($"{a} * {b} = {a * b}");
         }
 
         private void Division(float a, float b)
         {
             if (b != 0)
-                Console.WriteLine(a / b);
+                Console.WriteLine($"{a} / {b} = {a / b}");
             else
                 Console.WriteLine("Invalid Operation");
         }
