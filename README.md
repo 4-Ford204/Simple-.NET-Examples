@@ -7,7 +7,6 @@
 <details>
  <summary><b>Console Applications</b> About These Topics</summary>
  <ul>
-  <li>Delegate</li>
   <li>Elasticsearch</li>
   <li>Redis</li>
   <li>
@@ -25,14 +24,7 @@
      <li>Parallel</li>
      <li>Delegate</li>
      <li>Indexer</li>
-     <li>
-      <details margin=0>
-       <summary><b>Operator</b></summary>
-       <ul>
-        <li>Binary Operator - Bitwise</li>
-       </ul>
-      </details>
-     </li>  
+     <li>Binary Operator - Bitwise</li>
     </ul>
    </details>
   </li>
