@@ -8,6 +8,7 @@
 	<ItemGroup>
 		<PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
 		<PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.15.10" />
+		<PackageReference Include="MongoDB.Driver" Version="3.2.1" />
 		<PackageReference Include="NRedisStack" Version="0.13.0" />
 	</ItemGroup>
 

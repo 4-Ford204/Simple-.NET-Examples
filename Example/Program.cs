@@ -1,4 +1,6 @@
-﻿using Example.Learning;
+﻿using Example.Algorithms;
+using Example.Learning;
+using System;
 
 namespace Example
 {
@@ -6,8 +8,7 @@ namespace Example
     {
         public static void Main(string[] args)
         {
-            Delegate @delegate = new Delegate();
-            @delegate.DelegateExample();
+            Console.WriteLine("Hellow World");
         }
     }
 }
