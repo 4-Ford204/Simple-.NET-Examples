@@ -26,6 +26,7 @@
      <li>Delegate</li>
      <li>Indexer</li>
      <li>Binary Operator - Bitwise</li>
+     <li>Trie</li>
     </ul>
    </details>
   </li>
