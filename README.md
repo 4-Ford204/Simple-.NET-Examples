@@ -75,9 +75,14 @@ Searching with <b>Web API</b> using <b>Elasticsearch</b>
 
 Caching with <b>Web API</b> using <b>Redis</b>
 
+## ![gRPC][grpc-shield]
+
+<b>Web API</b> using <b>gRPC protos</b>
+
 [ocelot-shield]: https://img.shields.io/badge/ocelot-000000?style=for-the-badge&logo=ocelot&logoColor=white
 [yarp-shield]: https://img.shields.io/badge/yarp-1294C8?style=for-the-badge&logo=yarp&logoColor=white
 [elasticsearch-shield]: https://img.shields.io/badge/Elastic_Search-005571?style=for-the-badge&logo=elasticsearch&logoColor=white
 [kafka-shield]: https://img.shields.io/badge/apachekafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white
 [rabbitmq-shield]: https://img.shields.io/badge/rabbitmq-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white
 [redis-shield]: https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white
+[grpc-shield]: https://img.shields.io/badge/gRPC-244c5a?style=for-the-badge&logo=grpc&logoColor=white
